@@ -1,0 +1,27 @@
+# Pipeline configuration — edit without changing code
+
+data:
+  unify_export: data/unify_contacts.csv
+  csv_glob: data/*prospects*.csv,data/*edge*.csv
+  manual_signals: config/manual_signals.csv
+
+scoring:
+  signals: config/signals.yaml
+  output_dir: output
+
+zero:
+  push_tiers:
+    - Tier A
+    - Tier B
+  skip_reject: true
+  source_tag: lightfern_champion_scorer
+
+scaile:
+  keywords:
+    - AI email writing tool
+    - "best AI email tools to preserve your writing voice"
+    - AI writing for founders
+    - "best AI email tools to avoid generic AI writing"
+    - best email autocomplete
+  tracking_csv: inbound/scaile_tracking.csv
+  baseline_md: inbound/scaile_baseline.md

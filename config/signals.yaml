@@ -1,0 +1,103 @@
+# Champion signal keywords — edit without changing code
+
+negative_disqualify:
+  - ai humanizer
+  - humanize ai text
+  - bypass ai detection
+  - cold email
+  - cold email sales
+  - ai receptionist
+  - 24/7 call answering
+  - ai voice agents
+  - chatbot
+  - lead generation
+  - ai automation agency
+
+role_founder_ceo:
+  keywords:
+    - founder
+    - co-founder
+    - ceo
+    - chief executive
+    - managing director
+  points: 15
+
+role_vc_accelerator:
+  keywords:
+    - vc
+    - venture
+    - accelerator
+    - incubator
+    - investor
+    - portfolio
+  points: 20
+
+role_gtm_partnerships:
+  keywords:
+    - gtm
+    - go-to-market
+    - partnerships
+    - business development
+    - investor relations
+  points: 12
+
+public_writing:
+  keywords:
+    - substack
+    - newsletter
+    - blog
+    - blogging
+    - writer
+    - writing
+  points: 22
+
+writing_craft:
+  keywords:
+    - communication
+    - taste
+    - ai slop
+    - voice
+    - craft
+    - storytelling
+  points: 18
+
+stack_builder:
+  keywords:
+    - stack
+    - tooling
+    - workflow
+    - ai tools
+    - ai writer
+    - generative ai
+  points: 8
+
+network_community:
+  keywords:
+    - community
+    - thought leader
+    - educator
+    - podcast
+    - speaker
+  points: 12
+
+ai_native_company:
+  keywords:
+    - ai
+    - artificial intelligence
+    - machine learning
+    - llm
+    - generative
+  points: 5
+
+tiers:
+  a_min: 70
+  b_min: 45
+
+outreach_angles:
+  substack_author: "Reference their newsletter - you clearly care about written voice, not volume."
+  vc_accelerator: "Mention their portfolio/accelerator role - one champion here reaches dozens of founders."
+  writing_craft: "Connect to their posts on communication quality vs AI slop."
+  founder_ceo: "Acknowledge the high-stakes email load of running an AI company."
+  stack_builder: "Reference their public stack posts - Lightfern fits founders who pick tools deliberately."
+  gtm_leader: "Frame around partnership/investor emails that cannot sound generic."
+  default: "Light, specific note about why their voice matters in email - no product pitch in the opener."
