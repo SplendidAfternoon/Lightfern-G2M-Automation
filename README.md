@@ -1,54 +1,47 @@
-# Lightfern Champion GTM System
+# 🚀 Lightfern Champion GTM System
 
-Hackathon submission: find champions, reach them personally, make Lightfern discoverable.
+> A Go-To-Market automation pipeline built to identify, score, and reach top champions.
 
-## One command
+This project was built as a hackathon submission. It is an automated data pipeline designed to pull prospect lists, algorithmically score them to find high-value "Champions," and seamlessly route them into outbound sequencing and CRM tools.
 
-```powershell
-cd Desktop\lightfern-gtm-hackathon
-pip install -r requirements.txt
-copy .env.example .env   # add API keys
+## 🔄 How it Works (The Pipeline)
 
-python run_pipeline.py
-```
+The system operates in a 4-step automated chain:
+1. **Pull (Unify):** Extracts raw prospect data from Unify.
+2. **Score (Algorithm):** Evaluates prospects and generates a ranked leaderboard.
+3. **Route (Zero CRM):** Automatically pushes Tier A and Tier B prospects into Zero CRM.
+4. **Sync (Scaile):** Updates Scaile tracking for inbound discovery.
 
-## Pipeline chain
+*Note: Tier A prospects are isolated into a specific export for manual injection into Unify's outbound email sequences.*
 
-```
-[1] Unify pull     integrations/unify_client.py  -> data/unify_contacts.csv
-[2] Score         score_prospects.py             -> output/scored_leaderboard.csv
-[3] Zero push     integrations/zero_client.py    -> Zero CRM (Tier A + B)
-[4] Scaile sync   integrations/scaile_client.py  -> inbound/scaile_tracking.csv
-```
+## 📂 Data Outputs
 
-**We pull FROM Unify, not push TO Unify.** Tier A CSV goes into Unify sequences manually for outbound email.
+Running the pipeline generates clean, tiered CSVs ready for action:
 
-## Where are my contacts?
-
-| Location | What's there |
+| Export | Description |
 |---|---|
-| `output/scored_leaderboard.csv` | All **48** scored contacts, ranked |
-| `output/tier_a_unify_export.csv` | **17** Tier A — import to Unify sequences |
-| `output/zero_import.csv` | **40** Tier A + B for CRM |
-| **Zero CRM** | Filter source = `lightfern_champion_scorer` |
-| **Unify** | Import tier_a CSV into a sequence (outbound send) |
+| `scored_leaderboard.csv` | The master list of all scored and ranked contacts. |
+| `tier_a_unify_export.csv` | Top-tier prospects ready for immediate outbound sequencing. |
+| `zero_import.csv` | Cleaned data for CRM ingestion (Tier A + B). |
 
-## Tech stack
+## 🛠️ Quick Start
 
-See **deck/SUBMISSION_DECK.md** — Tech stack section.
+1. Clone the repository and install dependencies:
+   ```bash
+   git clone https://github.com/SplendidAfternoon/lightfern-gtm-hackathon.git
+   cd lightfern-gtm-hackathon
+   pip install -r requirements.txt
+   ```
 
-## API keys (.env)
+2. Set up your environment variables (requires Unify, Zero, and Scaile API keys):
+   ```bash
+   cp .env.example .env
+   ```
 
-Copy `.env.example` to `.env` and add your own keys locally. **Never commit `.env`** — it is gitignored.
+3. Run the end-to-end pipeline:
+   ```bash
+   python run_pipeline.py
+   ```
 
-```powershell
-copy .env.example .env
-```
-
-- `UNIFY_API_KEY` — pull audience (Data API + Bulk API)
-- `ZERO_API_KEY` + `ZERO_WORKSPACE_ID` — push scored contacts
-- `SCAILE_API_KEY` — tracking sync (dashboard is primary; API may be app-only)
-
-## Submission deck
-
-`deck/SUBMISSION_DECK.md`
+## 📖 Learn More
+Check out the full submission details and technical architecture in `deck/SUBMISSION_DECK.md`.
