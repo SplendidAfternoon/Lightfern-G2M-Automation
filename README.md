@@ -1,30 +1,25 @@
-# 🚀 Lightfern Champion GTM System
+# Lightfern GTM Automation Pipeline
 
-> A Go-To-Market automation pipeline built to identify, score, and reach top champions.
+> An automated Go-To-Market (GTM) ETL pipeline featuring algorithmic prospect scoring, data normalization, and distributed CRM orchestration.
 
-**Note:** This is an archived technical reference for a data pipeline built during a hackathon. The original setup required proprietary API keys for Zero CRM and Unify which have been rotated. 
+**Note:** This is an archived technical reference. The architecture relies on rotated API keys and deprecated endpoints for Zero CRM and Unify. It is preserved as a blueprint for multi-node GTM data engineering.
 
-This project is an automated data pipeline designed to pull prospect lists, algorithmically score them to find high-value "Champions," and seamlessly route them into outbound sequencing and CRM tools.
+## Pipeline Architecture
 
-## 🔄 How it Works (The Pipeline)
+The system operates as a 4-stage automated Extract, Transform, Load (ETL) and routing chain designed to minimize manual data entry and optimize outbound sales latency:
 
-The system operates in a 4-step automated chain:
-1. **Pull (Unify):** Extracts raw prospect data from Unify via bulk API endpoints.
-2. **Score (Algorithm):** Evaluates prospects and generates a ranked leaderboard based on algorithmic scoring criteria.
-3. **Route (Zero CRM):** Automatically pushes Tier A and Tier B prospects into Zero CRM.
-4. **Sync (Scaile):** Updates Scaile tracking for inbound discovery.
+### 1. Data Ingestion & Extraction (Pull Layer)
+- **Bulk API Polling:** Interfaces with Unify's REST APIs to asynchronously extract raw, unstructured prospect data.
+- **Data Normalization:** Sanitizes and maps disparate JSON payloads into a unified, strict schema suitable for algorithmic evaluation.
 
-*Note: Tier A prospects were historically isolated into a specific export for manual injection into Unify's outbound email sequences.*
+### 2. Algorithmic Scoring Heuristics
+- **Weighted Evaluation:** Processes normalized prospect data through a custom heuristics engine, evaluating key identifiers against ideal-customer-profile (ICP) thresholds.
+- **Tiered Leaderboard Generation:** Mutates the dataset into a strict, ranked hierarchy (Tier A/B/C), exporting a deterministic `scored_leaderboard.csv` artifact.
 
-## 📂 Data Outputs
+### 3. CRM Orchestration & Routing (Push Layer)
+- **Automated Ingestion:** Establishes a secure pipeline to push high-value (Tier A/B) prospects directly into Zero CRM.
+- **State Synchronization:** Ensures data integrity by mapping custom fields and appending tracking metadata (e.g., `source = lightfern_champion_scorer`).
+- **Segregated Outbound Generation:** Isolates top-percentile leads (`tier_a_unify_export.csv`) for targeted, manual injection into high-touch outbound sequencing endpoints.
 
-Running the pipeline generated clean, tiered CSV structures ready for action:
-
-| Export | Description |
-|---|---|
-| `scored_leaderboard.csv` | The master list of all scored and ranked contacts. |
-| `tier_a_unify_export.csv` | Top-tier prospects ready for immediate outbound sequencing. |
-| `zero_import.csv` | Cleaned data for CRM ingestion (Tier A + B). |
-
-## 📖 Technical Details
-For deeper insights into the pipeline design, refer to the original architectural breakdown in `deck/SUBMISSION_DECK.md`.
+### 4. Telemetry & Tracking
+- **Inbound Discovery Sync:** Interfaces with Scaile APIs to maintain stateful tracking data across the sales funnel, closing the loop between outbound engagement and inbound analytics.
